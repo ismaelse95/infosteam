@@ -8,4 +8,12 @@ port = os.environ['PORT']
 def inicio():
 	return render_template('index.html')
 
+@app.route('/contacta')
+def contacta():
+	return render_template('contacta.html')
+
+@app.route('/busperfil')
+def busperfil():
+	return render_template('busperfil.html')
+
 app.run('0.0.0.0',int(port), debug=True)
