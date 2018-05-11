@@ -16,8 +16,8 @@ def contacta():
 def busperfil():
 	return render_template('busperfil.html')
 
-@app.route('/formulario')
-def formulario():
+@app.route('/reportes')
+def reportes():
 	return render_template('formulario.html')
 
 @app.route('/juegos')
