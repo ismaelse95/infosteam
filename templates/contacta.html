@@ -1,42 +1,6 @@
-<!DOCTYPE HTML>
-<html lang="es">
-	<head>
-		<title>INFOSTEAM</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1" />
-		<!--[if lte IE 8]><script src="assets/js/ie/html5shiv.js"></script><![endif]-->
-		<link rel="stylesheet" href="/static/css/main.css" />
-		<!--[if lte IE 8]><link rel="stylesheet" href="/static/css/ie8.css" /><![endif]-->
-        <link rel="icon" href="https://store.steampowered.com/favicon.ico" type="image/x-icon">
-	</head>
-	<body class="right-sidebar">
-		<div id="page-wrapper">
-
-			<!-- Header -->
-				<div id="header-wrapper">
-					<div id="header">
-
-						<!-- Logo -->
-							<h1><a href="index.html">INFOSTEAM</a></h1>
-
-						<!-- Nav -->
-							<nav id="nav">
-								<ul>
-									<li><a href="index.html">Inicio</a></li>
-									<li><a href="busperfil.html">Perfil Steam</a></li>
-									<li><a href="formulario.html">Busqueda</a></li>
-									<li class="current"><a href="contacta.html">Contacto</a></li>
-								</ul>
-							</nav>
-
-					</div>
-				</div>
-
-			<!-- Main -->
-				<div id="main-wrapper">
-					<div class="container">
-
-						<!-- Content -->
+{% extends "base.html" %}
+{% block menu2 %}<li class="current"><a href="contacta.html">Contacto</a></li>{% endblock %}		
+{% block contenido3 %}{% block contenido %}
 							<article class="box post">
 								<a href="#" class="image featured"><img src="images/5.jpg" alt="" /></a>
 								<header>
@@ -58,47 +22,4 @@
                             		<input type="submit">
                                     </form>
 							</article>
-					</div>
-				</div>
-
-			<!-- Footer -->
-				<div id="footer-wrapper">
-					<section id="footer" class="container"><h2>PIE DE PÁGINA</h2>
-						<div class="row">
-							<div class="4u 12u(mobile)">
-								<section>
-									<header>
-										<h2>Visitanos en</h2>
-									</header>
-									<ul class="social">
-										<li><a class="icon fa-facebook" href="#"><span class="label">Facebook</span></a></li>
-										<li><a class="icon fa-twitter" href="#"><span class="label">Twitter</span></a></li>
-										<li><a class="icon fa-dribbble" href="#"><span class="label">Dribbble</span></a></li>
-										<li><a class="icon fa-linkedin" href="#"><span class="label">LinkedIn</span></a></li>
-										<li><a class="icon fa-google-plus" href="#"><span class="label">Google+</span></a></li>
-									</ul>
-								</section>
-							</div>
-						</div>
-					</section>
-				</div>
-                            <!-- Copyright -->
-									<div id="copyright">
-										<ul class="links">
-											<li>&copy; Untitled. All rights reserved.</li><li>Design: HTML5 UP</li>
-										</ul>
-									</div>
-		</div>
-
-
-		<!-- Scripts -->
-			<script src="/static/js/jquery.min.js"></script>
-			<script src="/static/js/jquery.dropotron.min.js"></script>
-			<script src="/static/js/skel.min.js"></script>
-			<script src="/static/js/skel-viewport.min.js"></script>
-			<script src="/static/js/util.js"></script>
-			<!--[if lte IE 8]><script src="/static/js/ie/respond.min.js"></script><![endif]-->
-			<script src="/static/js/main.js"></script>
-
-	</body>
-</html>
+{% endblock %}

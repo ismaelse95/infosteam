@@ -22,10 +22,10 @@
 						<!-- Nav -->
 							<nav id="nav">
 								<ul>
-									<li class="current"><a href="index.html">Inicio</a></li>
+									{% block menu1 %}{% endblock %}
 									<li><a href="busperfil.html">Perfil Steam</a></li>
 									<li><a href="formulario.html">Busqueda</a></li>
-									<li><a href="contacta.html">Contacto</a></li>
+									{% block menu2 %}{% endblock %}
 								</ul>
 							</nav>
 
@@ -39,10 +39,9 @@
 							<div class="8u 12u(mobile)">
 
 								<!-- Content -->
-									<article class="box post">
-										<a href="#" class="image featured"><img src="/static/images/pic01.jpg" alt="" /></a>
                                         {% block contenido %}{% endblock %}
-									</article>
+                                        {% block contenido3 %}{% endblock %}
+
 							</div>
                                     {% block contenido2 %}{% endblock %}
 						</div>
