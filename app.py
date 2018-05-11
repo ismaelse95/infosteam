@@ -20,8 +20,8 @@ def busperfil():
 def formulario():
 	return render_template('formulario.html')
 
-@app.route('/pagina1')
-def pagina1():
+@app.route('/juegos')
+def juegos():
 	return render_template('pagina1.html')
 
 app.run('0.0.0.0',int(port), debug=True)
