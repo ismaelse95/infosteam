@@ -1,4 +1,5 @@
-from flask import Flask, render_template, url_for
+from flask import Flask, render_template, url_for, request
+import requests
 import os
 
 app = Flask(__name__)
@@ -12,9 +13,15 @@ def inicio():
 def contacta():
 	return render_template('contacta.html')
 
-@app.route('/busperfil')
+@app.route('/busperfil',methods=["POST","GET"])
 def busperfil():
-	return render_template('busperfil.html')
+	if request.method == "get":
+		return render_template('busperfil.html')
+	else:
+		nombre=requet.forms.get("nombre")
+		return nombre
+	#return render_template('busperfil.html')
+
 
 @app.route('/reportes')
 def reportes():
