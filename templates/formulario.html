@@ -1,52 +1,14 @@
 {% extends "base.html" %}	
 {% block contenido5 %}
-
-						<!-- Content -->
-							<article class="box post">
-								<a href="#" class="image featured"><img src="images/3.jpeg" alt="" /></a>
-                                        <h4>Registrarse en PUBG</h4>
-                                        <form action="http://dit.gonzalonazareno.org/iesgn/resultado.php" method="post">
-                                        <div>
-                                            <fieldset>
-                                                <legend>Datos:</legend>
-                                                Nombre: <input type="text" name="nombre" value="" />
-                                                <br/>
-                                                Apellidos: <input type="text" name="apellidos" value="" />
-                                                <br/>
-                                                Contraseña: <input type="password" name="contrasena" value="" />
-                                                <br/>
-                                                Año de nacimiento: <input type="date" name="fecha">
-                                                <br/>
-                                                Edad: <input type="text" name="edad" id="edad" />
-                                            </fieldset>
-                                        </div>
-                                        <fieldset>
-                                            <legend> Sexo:</legend>
-                                            <input type="radio" name="sexo" value="hombre" checked="checked"/> Hombre<br/>
-                                            <input type="radio" name="sexo" value="mujer"/> Mujer
-                                        </fieldset>
-                                        
-                                        <fieldset>
-                                            <label for="so">Seleccionar nivel de juego:</label> <br/>
-                                            <select id="so" name="so">
-                                                <option value="" selected="selected">- selecciona -</option>
-                                                <option value="Avanzado">Avanzado</option>
-                                                <option value="Alto">Alto</option>
-                                                <option value="Medio">Medio</option>
-                                                <option value="Sin nivel">Sin nivel</option> 
-                                            </select><br/>
-                                        </fieldset>
-                                        <fieldset>
-                                            <legend>Otros datos:</legend>
-                                            <label for="descripcion">Descripción</label> <br/>
-                                            <textarea id="descripcion" name="descripcion" cols="40" rows="5"></textarea><br/>
-                                        </fieldset>
-                                        
-                                        <input type="reset" value="Borrar información">
-                                        <input type="submit" value="Enviar">
-                                        <br/>
-                                            </form>
-							</article>
+<article class="box post">    
+    <header>
+        <h2>LISTA DE TODOS LOS JUEGOS</h2>
+        <p>{% for a in juegos_lista %}
+            <p>{{a}}</p>
+            {% endfor %}
+        </p>
+    </header>
+</article>
 {% endblock %}
 					
 {% block contenido2 %}

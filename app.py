@@ -42,12 +42,33 @@ def busperfil(nombre=None, imagen=None, nombreusuario=None, steamid2=None, idiom
 				return render_template('perfil.html',nombre=nombre,imagen=imagen,nombreusuario=nombreusuario,steamid2=steamid2, idioma=idioma)
 
 
-@app.route('/reportes')
-def reportes():
-	return render_template('formulario.html')
+@app.route('/todoslosjuegos',methods=["post","get"])
+def todoslosjuegos(juegos=None):
+	if request.method == "POST":
+		return render_template('formulario.html')
+	else:
+		r=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
+		if r.status_code==200:
+			res3=r.json()
+			juegos_lista=[]
+			for elem in res3["applist"]["apps"]:
+				juegos_lista.append(elem["name"])
+			return render_template("formulario.html", juegos_lista=juegos_lista)
 
-@app.route('/juegos')
+@app.route('/juegos',methods=["post","get"])
 def juegos():
-	return render_template('pagina1.html')
+	if request.method == "GET":
+		return render_template('pagina1.html')
+	else:
+		nombre2=request.form.get("nombre")
+		r=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
+		if r.status_code==200:
+			resultado=r.json()
+			for elem in resultado["applist"]["apps"]:
+				for elem2 in elem:
+					for elen3 in elem2:
+						if elen3["name"] == nombre2:
+							ide=elen3["appid"]
+							return render_template('idjuego.html', ide=ide)
 
 app.run('0.0.0.0',int(port), debug=True)
