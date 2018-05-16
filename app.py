@@ -86,8 +86,12 @@ def logros():
 					if r.status_code==200:
 						resultado=r.json()
 						juegos_lista2=[]
+						errores = 0
 						for elem in resultado["game"]["availableGameStats"]["achievements"]:
-							juegos_lista2.append(elem["description"])
-					return render_template('logrosresultado.html',juegos_lista2=juegos_lista2)
+							try:
+								juegos_lista2.append(elem["description"])
+							except KeyError:
+								errores+=1
+						return render_template('logrosresultado.html',juegos_lista2=juegos_lista2)
 
 app.run('0.0.0.0',int(port), debug=True)
