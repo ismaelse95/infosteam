@@ -65,10 +65,29 @@ def juegos():
 		if r.status_code==200:
 			resultado=r.json()
 			for elem in resultado["applist"]["apps"]:
-				for elem2 in elem:
-					for elen3 in elem2:
-						if elen3["name"] == nombre2:
-							ide=elen3["appid"]
-							return render_template('idjuego.html', ide=ide)
+				if elem["name"] == nombre2:
+					ide=elem["appid"]
+					return render_template('idjuego.html', ide=ide, nombre2=nombre2)
+
+@app.route('/logros',methods=["post","get"])
+def logros():
+	if request.method == "GET":
+		return render_template('logros.html')
+	else:
+		nombre2=request.form.get("nombre")
+		r=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
+		if r.status_code==200:
+			resultado=r.json()
+			for elem in resultado["applist"]["apps"]:
+				if elem["name"] == nombre2:
+					ide=elem["appid"]
+					payload={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","appid":ide}
+					r=requests.get("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2",params=payload)
+					if r.status_code==200:
+						resultado=r.json()
+						juegos_lista2=[]
+						for elem in resultado["game"]["availableGameStats"]["achievements"]:
+							juegos_lista2.append(elem["description"])
+					return render_template('logrosresultado.html',juegos_lista2=juegos_lista2)
 
 app.run('0.0.0.0',int(port), debug=True)
