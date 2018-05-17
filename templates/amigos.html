@@ -1,0 +1,41 @@
+{% extends "base.html" %}	
+{% block contenido12 %}
+<article class="box post">
+	<header>
+		<h2>AMIGOS DEL PERFIL</h2>
+	</header>
+	<p><h4>Amigos: </h4>
+	{% for a in lista_amigos %}
+            <p>{{a}}</p>
+            {% endfor %}</p>
+</article>
+
+{% endblock %}
+
+{% block contenido2 %}
+							<div class="4u 12u(mobile)">
+
+								<!-- Sidebar -->
+									<section class="box">
+										<a href="#" class="image featured"><img src="https://www.errores.info/wp-content/uploads/2017/07/Steam-730x430.png" alt="" /></a>
+										<header>
+											<h3>Crear cuenta en STEAM</h3>
+										</header>
+										<p>¡Para poder empezar a disfrutar de todos los juegos de steam y poder utilizar esta página!</p>
+										<footer>
+											<a href="https://store.steampowered.com/join/?l=spanish" class="button alt">CREAR CUENTA</a>
+										</footer>
+									</section>
+									<section class="box">
+										<header>
+											<h3>Enlace a otras páginas</h3>
+										</header>
+										<p>Aquí podemos encontrar otras páginas de colaboradores.</p>
+										<ul class="divided">
+											<li><a href="https://github.com/ismaelse95">GitHub Ismael</a></li>
+											<li><a href="https://github.com/josedom24">Página Jose Domingo</a></li>
+											<li><a href="http://dit.gonzalonazareno.org/moodle/index.php">Moodle IES Gonzalo Nazareno</a></li>
+										</ul>
+									</section>
+							</div>
+{% endblock %}
