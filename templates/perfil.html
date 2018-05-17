@@ -10,6 +10,18 @@
 	<p><h3>Nombre de usuario:</h3> {{nombreusuario}}</p>
 	<p><h3>ID de steam:</h3> {{steamid2}}</p>
 	<p><h3>Idioma del perfil:</h3> {{idioma}}</p>
+	<p>
+		<h3>Ver los juegos de este perfil</h3>
+		<footer>
+		<a href="{{ url_for('juegosperfil',idnuevo=steamid2) }}" class="button alt">JUEGOS EN PROPIEDAD</a>
+		</footer>
+	</p>
+	<p>
+		<h3>Ver los amigos de tu perfil</h3>
+		<footer>
+		<a href="{{ url_for('amigos',idnuevo=steamid2) }}" class="button alt">VER AMIGOS</a>
+		</footer>
+	</p>
 </article>
 {% endblock %}
 
