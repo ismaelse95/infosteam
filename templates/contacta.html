@@ -1,4 +1,18 @@
 {% extends "base.html" %}	
+
+{% block menu %}
+<nav id="nav">
+	<ul>
+		<li><a href="{{ url_for('inicio') }}">Inicio</a></li>
+		<li><a href="{{ url_for('busperfil') }}">Perfil Steam</a></li>
+		<li><a href="{{ url_for('juegos') }}">Busqueda de Juego</a></li>
+		<li class="current"><a href="{{ url_for('contacta') }}">Contacto</a></li>
+	</ul>
+</nav>
+{% endblock %}
+
+
+
 {% block contenido3 %}
 							<article class="box post">
 								<a href="#" class="image featured"><img src="images/5.jpg" alt="" /></a>

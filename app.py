@@ -24,23 +24,28 @@ def busperfil(nombre=None, imagen=None, nombreusuario=None, steamid2=None, idiom
 		r=requests.get("http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/",params=payload)
 		if r.status_code==200:
 			res=r.json()
-			ide=res["response"]["steamid"]
+			try:
+				ide=res["response"]["steamid"]
 			#session["id"]=ide --> para iniciar una sesión.
-			payload2={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","steamids":ide}
-			r2=requests.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",params=payload2)
-			if r.status_code==200:
-				resultado=r2.json()
-				try:
-					nombre=resultado["response"]["players"][0]["realname"]
-					idioma=resultado["response"]["players"][0]["loccountrycode"]
-				except KeyError:
-					nombre="Nombre no disponible"
-					idioma="El idioma no esta disponible"
-
-				imagen=resultado["response"]["players"][0]["avatarfull"]
-				nombreusuario=resultado["response"]["players"][0]["personaname"]
-				steamid2=resultado["response"]["players"][0]["steamid"]
-				
+				payload2={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","steamids":ide}
+				r2=requests.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",params=payload2)
+				if r.status_code==200:
+					resultado=r2.json()
+					try:
+						nombre=resultado["response"]["players"][0]["realname"]
+						idioma=resultado["response"]["players"][0]["loccountrycode"]
+					except KeyError:
+						nombre="Nombre no disponible"
+						idioma="El idioma no esta disponible"
+	
+					imagen=resultado["response"]["players"][0]["avatarfull"]
+					nombreusuario=resultado["response"]["players"][0]["personaname"]
+					steamid2=resultado["response"]["players"][0]["steamid"]
+			except KeyError:
+				ide="No existe el usuario."
+			if ide == "No existe el usuario.":
+				return render_template('falloperfil.html',ide=ide)
+			else:
 				return render_template('perfil.html',nombre=nombre,imagen=imagen,nombreusuario=nombreusuario,steamid2=steamid2, idioma=idioma)
 
 
