@@ -93,13 +93,17 @@ def logros():
 					if r.status_code==200:
 						resultado=r.json()
 						juegos_lista2=[]
+						total=[]
 						errores = 0
 						for elem in resultado["game"]["availableGameStats"]["achievements"]:
 							try:
 								juegos_lista2.append(elem["description"])
+								juegos_lista2.append(elem["icon"])
+								total.append(juegos_lista2)
+								juegos_lista2=[]
 							except KeyError:
 								errores+=1
-						return render_template('logrosresultado.html',juegos_lista2=juegos_lista2)
+						return render_template('logrosresultado.html',total=total)
 
 @app.route('/juegosperfil/<idnuevo>',methods=["post","get"])
 def juegosperfil(idnuevo):
