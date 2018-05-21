@@ -5,6 +5,7 @@ import os
 app = Flask(__name__)
 #app.secret_key="sdhaksjhdkasjdhsakjddksa" --> clave para una sesion nueva.
 port = os.environ['PORT']
+key = os.environ['key']
 
 @app.route('/')
 def inicio():
@@ -26,14 +27,14 @@ def busperfil(nombre=None, imagen=None, nombreusuario=None, steamid2=None, idiom
 		return render_template('busperfil.html')
 	else:
 		nombre = request.form.get("nombre")
-		payload={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","vanityurl":nombre}
+		payload={"key":key,"vanityurl":nombre}
 		r=requests.get("http://api.steampowered.com/ISteamUser/ResolveVanityURL/v0001/",params=payload)
 		if r.status_code==200:
 			res=r.json()
 			try:
 				ide=res["response"]["steamid"]
 			#session["id"]=ide --> para iniciar una sesión.
-				payload2={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","steamids":ide}
+				payload2={"key":key,"steamids":ide}
 				r2=requests.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",params=payload2)
 				if r.status_code==200:
 					resultado=r2.json()
@@ -101,7 +102,7 @@ def logros():
 				if elem["name"] == nombre2:
 					ide=elem["appid"]
 					indicador=True
-					payload={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","appid":ide}
+					payload={"key":key,"appid":ide}
 					r=requests.get("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2",params=payload)
 					if r.status_code==200:
 						resultado=r.json()
@@ -129,7 +130,7 @@ def juegosperfil(idnuevo):
 		return render_template('juegosperfil.html')
 	else:
 		ide=idnuevo
-		payload={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","steamid":ide,"format":"json"}
+		payload={"key":key,"steamid":ide,"format":"json"}
 		r=requests.get("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001",params=payload)
 		if r.status_code==200:
 			resultado=r.json()
@@ -153,7 +154,7 @@ def amigos(idnuevo):
 		return render_template('amigos.html')
 	else:
 		ide=idnuevo
-		payload={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","steamid":ide,"relationship":"friend"}
+		payload={"key":key,"steamid":ide,"relationship":"friend"}
 		r=requests.get("http://api.steampowered.com/ISteamUser/GetFriendList/v0001",params=payload)
 		if r.status_code==200:
 			resultado=r.json()
@@ -163,7 +164,7 @@ def amigos(idnuevo):
 				amigos.append(elem["steamid"])
 			for elem in amigos:
 				ide2=elem
-				payload2={"key":"42F6A0CFD74A7E1A887BD94BEC654B62","steamids":ide2}
+				payload2={"key":key,"steamids":ide2}
 				r2=requests.get("http://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/",params=payload2)
 				if r.status_code==200:
 					resultado2=r2.json()
