@@ -6,6 +6,7 @@ app = Flask(__name__)
 #app.secret_key="sdhaksjhdkasjdhsakjddksa" --> clave para una sesion nueva.
 port = os.environ['PORT']
 key = os.environ['key']
+key2 = os.environ['KeyYoutube']
 
 @app.route('/')
 def inicio():
@@ -171,6 +172,20 @@ def amigos(idnuevo):
 					nombreusuario=resultado2["response"]["players"][0]["personaname"]
 					lista_amigos.append(nombreusuario)
 			return render_template('amigos.html',lista_amigos=lista_amigos)
+
+@app.route('/videos/<nombre2>',methods=["post","get"])
+def videos(nombre2):
+	if request.method == "POST":
+		return render_template('videos.html')
+	else:
+		nombrejuego="{0} trailer castellano".format(nombre2)
+		payload={"part":"id,snippet","key": key2, "q":nombrejuego, "maxResults":1, "type":"video"}
+		r=requests.get('https://www.googleapis.com/youtube/v3/search', params=payload)
+		if r.status_code==200:
+			resultado=r.json()
+			for elem in json["items"]:
+				video2=("https://www.youtube.com/embed/{}".format(elem["id"]["videoId"]))
+			return render_template('videos.html',video2=video2)
 
 
 app.run('0.0.0.0',int(port), debug=True)
