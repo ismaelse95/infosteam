@@ -183,10 +183,10 @@ def videos(nombre2):
 		r=requests.get('https://www.googleapis.com/youtube/v3/search', params=payload)
 		if r.status_code==200:
 			resultado=r.json()
-			lista_video=[]
+			video2=""
 			for elem in resultado["items"]:
-				lista_video.append("https://www.youtube.com/embed/{}".format(elem["id"]["videoId"]))
-		return render_template('videos.html',lista_video=lista_video)
+				video2+="https://www.youtube.com/embed/{}".format(elem["id"]["videoId"])
+		return render_template('videos.html',video2=resultado)
 
 
 app.run('0.0.0.0',int(port), debug=True)
