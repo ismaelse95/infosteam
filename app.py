@@ -178,16 +178,16 @@ def videos(nombre2):
 	if request.method == "POST":
 		return render_template('videos.html')
 	else:
-		#nombrejuego="{0} trailer castellano".format(nombre2)
+		nombrejuego=nombre2
 		payload={"part":"id,snippet","key": key2, "q":"", "maxResults":1, "type":"video"}
-		payload["q"] = ("{0} trailer castellano").format(nombre2)
+		payload["q"] = ("{0} trailer castellano").format(nombrejuego)
 		r=requests.get('https://www.googleapis.com/youtube/v3/search', params=payload)
-		if r.status_code!=200:
+		if r.status_code==200:
 			resultado=r.json()
 			video2=""
 			for elem in resultado["items"]:
 				video2+="https://www.youtube.com/embed/{}".format(elem["id"]["videoId"])
-		return render_template('videos.html',video2=resultado)
+		return render_template('videos.html',video2=video2)
 
 
 app.run('0.0.0.0',int(port), debug=True)
