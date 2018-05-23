@@ -185,7 +185,7 @@ def videos(nombre2):
 			resultado=r.json()
 			for elem in resultado["items"]:
 				video2="https://www.youtube.com/embed/{}".format(elem["id"]["videoId"])
-			return render_template('videos.html',video2=video2)
+		return render_template('videos.html',video2=video2)
 
 
 app.run('0.0.0.0',int(port), debug=True)
