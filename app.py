@@ -184,8 +184,8 @@ def videos(nombre2):
 		if r.status_code==200:
 			resultado=r.json()
 			for elem in json["items"]:
-				video2=("https://www.youtube.com/embed/{}".format(elem["id"]["videoId"]))
-		return render_template('videos.html',video2=video2)
+				video2="https://www.youtube.com/embed/{}".format(elem["id"]["videoId"])
+			return render_template('videos.html',video2=video2)
 
 
 app.run('0.0.0.0',int(port), debug=True)
