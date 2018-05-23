@@ -182,7 +182,7 @@ def videos(nombre2):
 		payload={"part":"id,snippet","key": key2, "q":"", "maxResults":1, "type":"video"}
 		payload["q"] = ("{0} trailer castellano".format(nombre2))
 		r=requests.get('https://www.googleapis.com/youtube/v3/search', params=payload)
-		if r.status_code==200:
+		if r.status_code!=200:
 			resultado=r.json()
 			video2=""
 			for elem in resultado["items"]:
