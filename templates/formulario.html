@@ -3,11 +3,10 @@
 <article class="box post">    
     <header>
         <h2>LISTA DE TODOS LOS JUEGOS</h2>
-        <p>{% for a in juegos_lista %}
+        {% for a in juegos_lista %}
         	<br>
 				{{a}} 
             {% endfor %}
-        </p>
     </header>
 </article>
 {% endblock %}
