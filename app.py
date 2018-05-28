@@ -23,7 +23,7 @@ def contacta():
 	return render_template('contacta.html')
 
 @app.route('/busperfil',methods=["post","get"])
-def busperfil(nombre=None, imagen=None, nombreusuario=None, steamid2=None, idioma=None):
+def busperfil():
 	if request.method == "GET":
 		return render_template('busperfil.html')
 	else:
@@ -58,17 +58,14 @@ def busperfil(nombre=None, imagen=None, nombreusuario=None, steamid2=None, idiom
 
 
 @app.route('/todoslosjuegos',methods=["post","get"])
-def todoslosjuegos(juegos=None):
-	if request.method == "POST":
-		return render_template('formulario.html')
-	else:
-		r=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
-		if r.status_code==200:
-			res3=r.json()
-			juegos_lista=[]
-			for elem in res3["applist"]["apps"]:
-				juegos_lista.append(elem["name"])
-			return render_template("formulario.html", juegos_lista=juegos_lista)
+def todoslosjuegos():
+	r=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
+	if r.status_code==200:
+		res3=r.json()
+		juegos_lista=[]
+		for elem in res3["applist"]["apps"]:
+			juegos_lista.append(elem["name"])
+		return render_template("formulario.html", juegos_lista=juegos_lista)
 
 @app.route('/juegos',methods=["post","get"])
 def juegos():
@@ -125,7 +122,7 @@ def logros():
 			return render_template('fallologros.html')
 
 @app.route('/juegosperfil/<idnuevo>',methods=["post","get"])
-def juegosperfil(idnuevo):
+def juegosperfil():
 	if request.method == "POST":
 		#id=session["id"] --> Para usar el session
 		return render_template('juegosperfil.html')
@@ -154,7 +151,7 @@ def juegosperfil(idnuevo):
 
 
 @app.route('/amigos/<idnuevo>',methods=["post","get"])
-def amigos(idnuevo):
+def amigos():
 	if request.method == "POST":
 		return render_template('amigos.html')
 	else:
