@@ -121,8 +121,8 @@ def logros():
 							return render_template('logrosresultado.html',total=total)
 				if not indicador:
 					return render_template('fallologros.html')
-			except KeyError:
-				return render_template('fallologros.html')
+		except KeyError:
+			return render_template('fallologros.html')
 
 @app.route('/juegosperfil/<idnuevo>',methods=["post","get"])
 def juegosperfil(idnuevo):
