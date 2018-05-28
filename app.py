@@ -133,21 +133,25 @@ def juegosperfil(idnuevo):
 		ide=idnuevo
 		payload={"key":key,"steamid":ide,"format":"json"}
 		r=requests.get("http://api.steampowered.com/IPlayerService/GetOwnedGames/v0001",params=payload)
-		if r.status_code==200:
-			resultado=r.json()
-			juegos=[]
-			for elem in resultado["response"]["games"]:
-				juegos.append(elem["appid"])
-				cuenta_juegos=len(juegos)
-			r2=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
+		try:
 			if r.status_code==200:
-				res3=r2.json()
-				juegos_lista=[]
-				for elem in res3["applist"]["apps"]:
-					for elem2 in juegos:
-						if elem["appid"] == elem2:
-							juegos_lista.append(elem["name"])
-		return render_template('juegosperfil.html', cuenta_juegos=cuenta_juegos, juegos_lista=juegos_lista)
+				resultado=r.json()
+				juegos=[]
+				for elem in resultado["response"]["games"]:
+					juegos.append(elem["appid"])
+					cuenta_juegos=len(juegos)
+				r2=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
+				if r.status_code==200:
+					res3=r2.json()
+					juegos_lista=[]
+					for elem in res3["applist"]["apps"]:
+						for elem2 in juegos:
+							if elem["appid"] == elem2:
+								juegos_lista.append(elem["name"])
+			return render_template('juegosperfil.html', cuenta_juegos=cuenta_juegos, juegos_lista=juegos_lista)
+		except KeyError:
+			return render_template('juegosperfilfallo.html')
+
 
 @app.route('/amigos/<idnuevo>',methods=["post","get"])
 def amigos(idnuevo):
