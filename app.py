@@ -122,7 +122,7 @@ def logros():
 			return render_template('fallologros.html')
 
 @app.route('/juegosperfil/<idnuevo>',methods=["post","get"])
-def juegosperfil():
+def juegosperfil(idnuevo):
 	if request.method == "POST":
 		#id=session["id"] --> Para usar el session
 		return render_template('juegosperfil.html')
@@ -151,7 +151,7 @@ def juegosperfil():
 
 
 @app.route('/amigos/<idnuevo>',methods=["post","get"])
-def amigos():
+def amigos(idnuevo):
 	if request.method == "POST":
 		return render_template('amigos.html')
 	else:
