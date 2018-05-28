@@ -93,36 +93,36 @@ def logros():
 	if request.method == "GET":
 		return render_template('logros.html')
 	else:
-		#try:
 		indicador=False
 		nombre2=request.form.get("nombre")
 		r=requests.get("http://api.steampowered.com/ISteamApps/GetAppList/v2")
-		if r.status_code==200:
-			resultado=r.json()
-			for elem in resultado["applist"]["apps"]:
-				if elem["name"] == nombre2:
-					ide=elem["appid"]
-					indicador=True
-					payload={"key":key,"appid":ide}
-					r=requests.get("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2",params=payload)
-					if r.status_code==200:
-						resultado=r.json()
-						juegos_lista2=[]
-						total=[]
-						errores = 0
-						for elem in resultado["game"]["availableGameStats"]["achievements"]:
-							try:
-								juegos_lista2.append(elem["description"])
-								juegos_lista2.append(elem["icon"])
-								total.append(juegos_lista2)
-								juegos_lista2=[]
-							except KeyError:
-								errores+=1
-						return render_template('logrosresultado.html',total=total)
-			if not indicador:
+		try:
+			if r.status_code==200:
+				resultado=r.json()
+				for elem in resultado["applist"]["apps"]:
+					if elem["name"] == nombre2:
+						ide=elem["appid"]
+						indicador=True
+						payload={"key":key,"appid":ide}
+						r=requests.get("http://api.steampowered.com/ISteamUserStats/GetSchemaForGame/v2",params=payload)
+						if r.status_code==200:
+							resultado=r.json()
+							juegos_lista2=[]
+							total=[]
+							errores = 0
+							for elem in resultado["game"]["availableGameStats"]["achievements"]:
+								try:
+									juegos_lista2.append(elem["description"])
+									juegos_lista2.append(elem["icon"])
+									total.append(juegos_lista2)
+									juegos_lista2=[]
+								except KeyError:
+									errores+=1
+							return render_template('logrosresultado.html',total=total)
+				if not indicador:
+					return render_template('fallologros.html')
+			except KeyError:
 				return render_template('fallologros.html')
-		#except (KeyError):
-		#	return render_template('fallologros.html')
 
 @app.route('/juegosperfil/<idnuevo>',methods=["post","get"])
 def juegosperfil(idnuevo):
